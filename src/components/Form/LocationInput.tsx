@@ -18,6 +18,7 @@ const LocationInput: React.FC<LocationInputProps> = ({
       sx={{ my: 1 }}
       label={label}
       value={value}
+      onChange={(e) => setValue(e.target.value)}
       InputProps={
         value.length > 0
           ? {
