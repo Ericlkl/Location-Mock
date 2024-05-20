@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-function Map({
+function MapComponent({
   center,
   zoom,
 }: {
@@ -24,4 +24,4 @@ function Map({
   }} />;
 }
 
-export default Map;
+export default MapComponent;

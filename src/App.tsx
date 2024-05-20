@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { HONG_KONG_COORINATE } from "@/constant";
+import { Stack } from "@mui/material";
 
-// Components
-import MapWrapper from "@/components/MapWrapper";
-import MapComponent from "@/components/Map";
+// Constant
+import { HONG_KONG_COORINATE } from "@/constant";
+// Custom Components
+import MapWrapper from "@/components/Map/MapWrapper";
+import MapComponent from "@/components/Map/MapComponent";
+import SearchForm from "@/components/Form/SearchForm";
+
 function App() {
   const [count, setCount] = useState(0);
 
@@ -12,7 +16,14 @@ function App() {
 
   return (
     <MapWrapper>
-      <MapComponent center={center} zoom={12} />
+      <Stack
+        sx={{ width: "100%", height: "100%" }}
+        direction={{ xs: "column", md: "row" }}
+        spacing={1}
+      >
+        <SearchForm />
+        <MapComponent center={center} zoom={12} />
+      </Stack>
     </MapWrapper>
   );
 }
