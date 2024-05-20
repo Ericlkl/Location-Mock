@@ -4,9 +4,9 @@ import { Stack } from "@mui/material";
 // Constant
 import { HONG_KONG_COORINATE } from "@/constant";
 // Custom Components
-import MapWrapper from "@/components/MapWrapper";
-import MapComponent from "@/components/Map";
-import SearchForm from "@/components/SearchForm";
+import MapWrapper from "@/components/Map/MapWrapper";
+import MapComponent from "@/components/Map/MapComponent";
+import SearchForm from "@/components/Form/SearchForm";
 
 function App() {
   const [count, setCount] = useState(0);
