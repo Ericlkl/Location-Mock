@@ -5,7 +5,7 @@ import SendIcon from "@mui/icons-material/Send";
 // Types
 import { QueryState } from "@/types";
 // Custom Component
-import LocationInput from "@/components/Form/LocationInput";
+import LocationInput from "./LocationInput";
 
 interface SearchFormProps {
   origin: string;

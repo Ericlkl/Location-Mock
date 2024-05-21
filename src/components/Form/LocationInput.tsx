@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -108,11 +108,11 @@ const LocationInput: React.FC<LocationInputProps> = ({
       filterSelectedOptions
       value={value}
       noOptionsText="No locations"
-      onChange={(event: any, newValue: PlaceType | null) => {
+      onChange={(_: any, newValue: PlaceType | null) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
       }}
-      onInputChange={(event, newInputValue) => {
+      onInputChange={(_, newInputValue) => {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
