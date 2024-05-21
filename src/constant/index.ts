@@ -4,3 +4,5 @@ export const HONG_KONG_COORINATE: google.maps.LatLngLiteral = {
   lat: 22.315008,
   lng: 114.2259712,
 }
+
+export const API_RETRY_MS = 1000;

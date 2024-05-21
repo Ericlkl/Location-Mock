@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import { getRoute, getRouteToken } from "@/api";
 // Types
 import { DirectionsWaypoint, QueryState } from "@/types";
+// Constant
+import { API_RETRY_MS } from "@/constant";
 
 export function useRouteQuery(){
-  const [origin, setOrigin] = useState("Innocentre, Hong Kong");
-  const [destination, setDestination] = useState("Hong Kong International Airport Terminal 1");
-  const [routeToken, setRouteToken] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
   const [waypoints, setwaypoints] = useState<DirectionsWaypoint[]>([])
   const [queryState, setQueryState] = useState<QueryState>({
     status: "pending"
@@ -17,7 +17,6 @@ export function useRouteQuery(){
     setQueryState({
       status: "pending"
     })
-    setRouteToken("")
     setwaypoints([])
   }
 
@@ -45,6 +44,10 @@ export function useRouteQuery(){
       if (routeResponse.status === 'success') {
         setwaypoints(convertPathTowaypoints(routeResponse.path))
       }
+      else if (routeResponse.status === 'in progress') {
+        // Retry to fet
+        setTimeout(() => queryRoute(token), API_RETRY_MS) 
+      }
     } catch (error) {
       console.log("Query Route Failed!!! ");
       console.log(error);
@@ -59,9 +62,8 @@ export function useRouteQuery(){
     try {
       resetQueryResult()
       // Get Route token for query 
-      const tokenResponse = await getRouteToken(origin, destination);
-      setRouteToken(tokenResponse.token)
-      await queryRoute(tokenResponse.token);
+      const { token } = await getRouteToken(origin, destination);
+      await queryRoute(token);
     } catch (error) {
       // Should stop requesting when the backend returns error.
       console.log("Submit Form Failed!!! ");
@@ -72,15 +74,6 @@ export function useRouteQuery(){
       })
     }
   };
-
-  // Retry logic when the backend is busy (returns in progress response).
-  useEffect(() => {
-    const isInProgress = queryState.status === 'in progress';
-    const isFetchedToken = routeToken.length > 0;
-    if (isInProgress && isFetchedToken) {
-      queryRoute(routeToken)
-    }
-  }, [queryState.status, routeToken])
 
   return {
     origin,

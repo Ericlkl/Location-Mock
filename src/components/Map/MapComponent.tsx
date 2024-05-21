@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 
 // Types
-import { DirectionsWaypoint, QueryState } from "@/types";
+import { DirectionsWaypoint } from "@/types";
 // Constant
 import { HONG_KONG_COORINATE } from "@/constant";
 

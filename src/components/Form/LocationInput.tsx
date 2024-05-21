@@ -7,9 +7,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import { debounce } from "@mui/material/utils";
-import { loadScript } from "@/utils";
-
-import { GOOGLE_MAP_KEY } from '@/constant'
 
 const autocompleteService: {
   current: google.maps.places.AutocompleteService | null;

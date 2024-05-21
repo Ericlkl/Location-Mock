@@ -26,6 +26,7 @@ export async function getRouteToken(
 export async function getRoute(token: string): Promise<RouteResponse> {
   try {
     const response = await backend_api.get<RouteResponse>(`/route/${token}`);
+    // const response = await backend_api.get<RouteResponse>(`/mock/route/inprogress`);
     // const response = await backend_api.get<RouteResponse>(`/mock/route/success`);
     return response.data;
   } catch (error) {
