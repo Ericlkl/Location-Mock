@@ -94,6 +94,12 @@ const LocationInput: React.FC<LocationInputProps> = ({
     };
   }, [value, inputValue, fetch]);
 
+  useEffect(() => {
+    if (inputValue === '') {
+      setValue(null)
+    }
+  }, [inputValue])
+
   return (
     <Autocomplete
       sx={{ my: 1 }}
