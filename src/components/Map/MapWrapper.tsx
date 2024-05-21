@@ -22,7 +22,7 @@ const MapWrapper: React.FC<MapWrapperProps> = ({ children }) => {
     }
   };
 
-  return <Wrapper apiKey={GOOGLE_MAP_KEY} render={render} />
+  return <Wrapper libraries={['places']} apiKey={GOOGLE_MAP_KEY} render={render} />
 }
 
 export default MapWrapper;

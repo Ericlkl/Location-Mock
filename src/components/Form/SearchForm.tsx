@@ -24,26 +24,28 @@ const SearchForm: React.FC<SearchFormProps> = ({
   setDestination,
   queryState,
   onSubmit,
-  onReset
+  onReset,
 }) => {
   return (
     <Stack padding={3} minWidth={{ xs: 0, md: 400 }}>
       <Stack marginTop={8}>
         <LocationInput
           label="Start point"
-          value={origin}
-          setValue={setOrigin}
+          inputValue={origin}
+          setInputValue={setOrigin}
         />
         <LocationInput
           label="Drop-off point"
-          value={destination}
-          setValue={setDestination}
+          inputValue={destination}
+          setInputValue={setDestination}
         />
       </Stack>
 
       <Stack marginX={1} marginY={4}>
-        {queryState.status === 'failure' && (
-          <Typography color="red" fontWeight="bold" >{queryState.error}</Typography>
+        {queryState.status === "failure" && (
+          <Typography color="red" fontWeight="bold">
+            {queryState.error}
+          </Typography>
         )}
         {queryState.status === "success" && (
           <>
