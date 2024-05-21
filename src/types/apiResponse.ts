@@ -2,10 +2,10 @@ export type RouteResponse =
   | { status: "in progress" }
   | {
       status: "failure";
-      error: "Location not accessible by car";
+      error: string;
     }
   | {
-      path: Array<[number, number]>;
+      path: Array<[string, string]>;
       total_time: number;
       total_distance: number;
       status: "success";

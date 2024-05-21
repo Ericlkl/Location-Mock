@@ -1,36 +1,24 @@
 import { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 
-import { getRoute, getRouteToken } from "@/api";
-// Types 
-import { RouteResponse } from '@/types/apiResponse'
-// Constant
-import { HONG_KONG_COORINATE } from "@/constant";
 // Custom Components
 import MapWrapper from "@/components/Map/MapWrapper";
 import MapComponent from "@/components/Map/MapComponent";
 import SearchForm from "@/components/Form/SearchForm";
+import { useRouteQuery } from "./hooks";
 
 function App() {
-  const [origin, setOrigin] = useState("Innocentre, Hong Kong");
-  const [destination, setDestination] = useState("Hong Kong International Airport Terminal 1");
-  const [route, setRoute] = useState<Array<[number, number]>>([]);
 
-  const onFormSubmit = async () => {
-    try {
-      const { token } = await getRouteToken(origin, destination);
-      const routeResponse = await getRoute(token);
-      if (routeResponse.status === 'success') {
-        setRoute(routeResponse.path)
-      }
-    } catch (error) {
-      console.log("Query Route Failed!!! ")
-      console.log(error)
-    }
-  };
-
-  const [center, setCenter] =
-    useState<google.maps.LatLngLiteral>(HONG_KONG_COORINATE);
+  const {
+    origin,
+    destination,
+    waypoints,
+    queryState,
+    setOrigin,
+    setDestination,
+    onFormSubmit,
+    onReset
+  } = useRouteQuery()
 
   return (
     <MapWrapper>
@@ -41,12 +29,14 @@ function App() {
       >
         <SearchForm
           origin={origin}
-          setOrigin={setOrigin}
           destination={destination}
+          queryState={queryState}
+          setOrigin={setOrigin}
           setDestination={setDestination}
           onSubmit={onFormSubmit}
+          onReset={onReset}
         />
-        <MapComponent center={center} zoom={12} />
+        <MapComponent zoom={12} waypoints={waypoints} />
       </Stack>
     </MapWrapper>
   );
